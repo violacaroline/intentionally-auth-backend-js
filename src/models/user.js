@@ -43,6 +43,11 @@ const schema = new mongoose.Schema({
     lowercase: true,
     trim: true,
     validate: [isEmail, 'Please provide a valid email address.']
+  },
+  admin: {
+    type: Boolean,
+    required: [true, 'Administrator rights is required.'],
+    trim: true
   }
 }, {
   timestamps: true,
