@@ -46,7 +46,6 @@ const schema = new mongoose.Schema({
   },
   admin: {
     type: Boolean,
-    required: [true, 'Administrator rights is required.'],
     trim: true
   }
 }, {
