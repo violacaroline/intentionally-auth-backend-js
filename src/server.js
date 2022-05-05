@@ -4,8 +4,10 @@
 
 import express from 'express'
 import helmet from 'helmet'
+import cors from 'cors'
 import logger from 'morgan'
 import { router } from './routes/router.js'
+import { corsOptions } from './config/corsOptions.js'
 import { connectDB } from './config/mongoose.js'
 
 try {
@@ -18,6 +20,9 @@ try {
 
   // Set up a morgan logger using the dev format for log entries.
   app.use(logger('dev'))
+
+  // Cross Origin Resource Sharing
+  app.use(cors(corsOptions))
 
   // Parse requests of the content type application/json.
   app.use(express.json())
