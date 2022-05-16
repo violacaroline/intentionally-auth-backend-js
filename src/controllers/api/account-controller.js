@@ -38,8 +38,9 @@ export class AccountController {
 
       res
         .json({
-          access_token: accessToken,
+          username: user.username,
           user_id: user.id,
+          access_token: accessToken,
           message: 'You are logged in'
         })
     } catch (error) {
