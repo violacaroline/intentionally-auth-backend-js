@@ -91,4 +91,47 @@ export class AccountController {
       next(err)
     }
   }
+
+  /**
+   * Deletes a user.
+   *
+   * @param {object} req - Express request object.
+   * @param {object} res - Express response object.
+   * @param {Function} next - Express next middleware function.
+   */
+  async delete (req, res, next) {
+    try {
+      let token = req.headers.authorization
+
+      if (token.includes('Bearer')) {
+        const authorization = token.split(' ')
+        token = authorization[1]
+      }
+      const publicKey = Buffer.from(process.env.PUBLIC_ACCESS_TOKEN_SECRET, 'base64')
+
+      const payload = jwt.verify(token, publicKey)
+
+      if (!payload) {
+        throw new Error('Invalid authentication token, authorization denied')
+      }
+
+      await User.findByIdAndDelete(payload.sub)
+
+      res
+        .status(204)
+        .json({
+          message: 'Sad to see you go, your account was deleted.'
+        })
+    } catch (error) {
+      let err = error
+
+      if (err.code === 500) {
+        // Server error.
+        err = createError(500)
+        err.cause = error
+      }
+
+      next(err)
+    }
+  }
 }

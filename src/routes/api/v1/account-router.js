@@ -16,3 +16,6 @@ router.post('/login', (req, res, next) => controller.login(req, res, next))
 
 // Register
 router.post('/register', (req, res, next) => controller.register(req, res, next))
+
+// Delete user
+router.delete('/delete', (req, res, next) => controller.delete(req, res, next))
