@@ -99,7 +99,7 @@ export class AccountController {
    * @param {object} res - Express response object.
    * @param {Function} next - Express next middleware function.
    */
-  async delete (req, res, next) {
+  async deleteAccount (req, res, next) {
     try {
       let token = req.headers.authorization
 
